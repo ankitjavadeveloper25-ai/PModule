@@ -146,4 +146,24 @@ export const RegisterPage: React.FC = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-brand-bg border border-brand-border text-white text-sm focus:
+                className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-brand-bg border border-brand-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary placeholder:text-brand-dim"
+              />
+              <Lock className="w-4 h-4 text-brand-dim absolute left-3.5 top-3.5" />
+            </div>
+          </div>
+
+          <Button variant="primary" size="lg" type="submit" className="w-full mt-2" isLoading={loading}>
+            Create Account
+          </Button>
+        </form>
+
+        <div className="pt-4 border-t border-brand-border text-center text-xs text-brand-muted">
+          Already have an account?{' '}
+          <Link to="/login" state={state} className="text-brand-primary font-semibold hover:underline">
+            Sign in
+          </Link>
+        </div>
+      </Card>
+    </div>
+  );
+};

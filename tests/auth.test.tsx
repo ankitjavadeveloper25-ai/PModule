@@ -18,10 +18,10 @@ describe('Auth Pages', () => {
     expect(screen.getByRole('heading', { name: /Sign In to Winter ARC/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/Email Address/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Sign In/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /^Sign In$/i })).toBeInTheDocument();
 
     // Verify Google login button and separator
-    expect(screen.getByRole('button', { name: /Continue with Google/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Google/i })).toBeInTheDocument();
     expect(screen.getByText(/Or continue with email/i)).toBeInTheDocument();
   });
 
@@ -36,4 +36,13 @@ describe('Auth Pages', () => {
 
     expect(screen.getByRole('heading', { name: /Create your account/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/Full Name/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Email Address/i)).t
+    expect(screen.getByLabelText(/Email Address/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^Password/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Confirm Password/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Create Account/i })).toBeInTheDocument();
+
+    // Verify Google register button and separator
+    expect(screen.getByRole('button', { name: /Google/i })).toBeInTheDocument();
+    expect(screen.getByText(/Or register with email/i)).toBeInTheDocument();
+  });
+});

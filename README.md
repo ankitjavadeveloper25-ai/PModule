@@ -14,6 +14,7 @@ This directory contains the production React commercial website and customer pla
 - **Official Download Portal (`/download`)**: Direct distribution of the verified Windows MSI installer (`Winter ARC Pro-1.0.1.msi`, 76.4 MB) with SHA-256 integrity verification instructions (`96374a521f746bd238eadb0a94b6934ebe4ae92cd7ebc615dda081400cc770c2`).
 - **Setup & Activation Guide (`/guide`)**: 5-step visual walkthrough for installing the MSI package, launching the client, and synchronizing offline Ed25519 license tokens.
 - **Razorpay Checkout Integration**: Secure checkout modal powered by Razorpay's JavaScript SDK and backend HMAC-SHA256 signature verification.
+- **Google Account Authentication**: One-click passwordless login and registration powered by Google Identity Services, auto-provisioning verified user accounts and Free subscriptions.
 - **Account & Entitlements Dashboard (`/account`)**: Real-time subscription status, token export for isolated offline machines, and transaction history.
 - **Legal & Support Suite**: Privacy Policy (`/privacy`), Terms of Service (`/terms`), Refund Policy (`/refund`), Contact Form (`/contact`), and FAQ (`/faq`).
 
@@ -52,6 +53,7 @@ Configure your environment variables:
 ```env
 VITE_API_BASE_URL=http://localhost:8080
 VITE_RAZORPAY_KEY_ID=rzp_test_1DP5mmOlF5G5ag
+VITE_GOOGLE_CLIENT_ID=your_google_client_id_here.apps.googleusercontent.com
 VITE_SITE_URL=http://localhost:5173
 ```
 

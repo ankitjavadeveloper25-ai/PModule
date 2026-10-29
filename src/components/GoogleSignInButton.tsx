@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { config } from '../config/env';
-import { LoadingSpinner } from './LoadingSpinner';
-import { AlertCircle, Sparkles, X, Check } from 'lucide-react';
+import { AlertCircle, Sparkles, X, Check, Loader2 } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -158,11 +157,14 @@ export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
           type="button"
           onClick={handleButtonClick}
           disabled={isLoading}
-          aria-label="Sign in with Google"
+          aria-label={mode === 'signup' ? 'Sign up with Google' : 'Sign in with Google'}
           className="w-full relative flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-brand-surface hover:bg-brand-surface-hover active:bg-brand-card text-white text-sm font-semibold border border-brand-border hover:border-brand-border-light transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-primary disabled:opacity-60 shadow-sm group"
         >
           {isLoading ? (
-            <LoadingSpinner size="sm" />
+            <div className="flex items-center gap-2">
+              <Loader2 className="w-4 h-4 text-brand-primary animate-spin" />
+              <span>Connecting to Google...</span>
+            </div>
           ) : (
             <>
               {/* Official Google 'G' SVG Logo */}
