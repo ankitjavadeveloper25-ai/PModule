@@ -17,6 +17,26 @@ interface OpenCheckoutOptions {
   onError: (errMsg: string) => void;
 }
 
+const loadRazorpayScript = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    if (typeof window.Razorpay !== 'undefined') {
+      return resolve(true);
+    }
+    const existing = document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(true));
+      existing.addEventListener('error', () => resolve(false));
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
 export function useRazorpay() {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
 
@@ -39,7 +59,8 @@ export function useRazorpay() {
       }
 
       // 2. Ensure Razorpay Checkout SDK is available
-      if (typeof window.Razorpay === 'undefined') {
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded || typeof window.Razorpay === 'undefined') {
         throw new Error('Razorpay Checkout SDK is not loaded. Please verify your internet connection.');
       }
 
