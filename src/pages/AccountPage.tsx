@@ -34,7 +34,7 @@ export const AccountPage: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      navigate('/login');
+      navigate('/login', { state: { returnTo: '/account' } });
     }
   }, [isAuthenticated, isLoading, navigate]);
 

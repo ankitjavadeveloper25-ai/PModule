@@ -35,6 +35,7 @@ export const AppRoutes: React.FC = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/account" element={<AccountPage />} />
+        <Route path="/profile" element={<AccountPage />} />
         <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
         <Route path="/checkout/pending" element={<CheckoutPendingPage />} />
         <Route path="/checkout/cancel" element={<CheckoutCancelPage />} />
