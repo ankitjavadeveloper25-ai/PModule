@@ -10,6 +10,7 @@ export const CheckoutSuccessPage: React.FC = () => {
   const orderId = params.get('orderId') || 'rzp_order_verified';
   const paymentId = params.get('paymentId') || 'pay_verified';
   const tier = params.get('tier') || 'PRO';
+  const isFromDesktop = params.get('source') === 'desktop';
 
   return (
     <div className="py-12 md:py-24 max-w-2xl mx-auto px-4 sm:px-6">
@@ -54,13 +55,13 @@ export const CheckoutSuccessPage: React.FC = () => {
               Launch <strong className="text-white">Winter ARC Pro</strong> on your Windows PC.
             </li>
             <li>
-              In the sidebar, navigate to <strong className="text-white">Account / Subscription</strong>.
+              In the sidebar, navigate to <strong className="text-white">Profile & Account</strong>.
             </li>
             <li>
-              Log in with your registered email and click <strong className="text-brand-primary">"Sync License"</strong>.
+              Under <em>Online Account & License Synchronization</em>, click <strong className="text-brand-primary">"Sync Entitlement Now"</strong>.
             </li>
             <li>
-              The desktop will download and cryptographically verify your new signed token with 14-day offline grace!
+              Your desktop will instantly download and cryptographically verify your new signed token with 14-day offline grace!
             </li>
           </ol>
         </div>

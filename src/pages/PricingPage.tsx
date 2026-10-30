@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Check,
   ShieldCheck,
@@ -24,10 +24,22 @@ export const PricingPage: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
   const { openCheckout, isProcessing } = useRazorpay();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const isFromDesktop = searchParams.get('source') === 'desktop';
+  const planParam = searchParams.get('plan')?.toUpperCase();
+  const emailParam = searchParams.get('email');
 
   const [authModalOpen, setAuthModalOpen] = useState(false);
   const [selectedPlanForAuth, setSelectedPlanForAuth] = useState<string | null>(null);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
+
+  // Match URL plan parameter to actual catalog plan ID
+  const normalizedPlanParam = planParam === 'PRO_PLAN_A' || planParam === 'PRO_MONTHLY' || planParam === 'A'
+    ? 'PRO_PLAN_A'
+    : planParam === 'PRO_PLAN_B' || planParam === 'PRO_YEARLY' || planParam === 'B' || planParam === 'LIFETIME'
+    ? 'PRO_PLAN_B'
+    : planParam;
 
   const handleSelectPlan = (planId: string) => {
     setCheckoutError(null);
@@ -48,10 +60,10 @@ export const PricingPage: React.FC = () => {
     // Trigger Razorpay Checkout
     openCheckout({
       planId,
-      userEmail: user?.email,
+      userEmail: user?.email || emailParam || undefined,
       userName: user?.fullName,
       onSuccess: (res) => {
-        navigate(`/checkout/success?orderId=${res.orderId}&paymentId=${res.paymentId}&tier=${res.tier || ''}`);
+        navigate(`/checkout/success?orderId=${res.orderId}&paymentId=${res.paymentId}&tier=${res.tier || ''}&source=${isFromDesktop ? 'desktop' : 'web'}`);
       },
       onCancel: () => {
         navigate('/checkout/cancel');
@@ -66,7 +78,34 @@ export const PricingPage: React.FC = () => {
     <div className="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-4">
-        <Badge variant="primary">Authoritative Server Pricing</Badge>
+        {isFromDesktop ? (
+          <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-brand-primary/20 via-brand-purple/20 to-brand-primary/20 border border-brand-primary/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-left shadow-glow">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-brand-primary/20 border border-brand-primary/50 flex items-center justify-center shrink-0 text-brand-primary shadow-glow">
+                <Zap className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h4 className="text-sm font-bold text-white">Winter ARC Desktop Connected</h4>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-primary text-brand-bg uppercase tracking-wider">
+                    Ready to Activate
+                  </span>
+                </div>
+                <p className="text-xs text-brand-muted mt-0.5">
+                  Complete your Pro upgrade below using Razorpay (UPI, Google Pay, PhonePe, Cards). After checkout, return to your desktop app to sync your active license.
+                </p>
+              </div>
+            </div>
+            {emailParam && (
+              <div className="text-right text-xs shrink-0 font-mono text-brand-dim hidden md:block">
+                Station Account: <span className="text-brand-text font-bold">{emailParam}</span>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Badge variant="primary">Authoritative Server Pricing</Badge>
+        )}
+
         <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
           Transparent, Fair Pricing for Disciplined Minds
         </h1>
@@ -112,25 +151,33 @@ export const PricingPage: React.FC = () => {
           {plans.map((plan) => {
             const isPopular = plan.popular;
             const isFree = plan.id === 'FREE';
+            const isSelectedFromDesktop = isFromDesktop && normalizedPlanParam === plan.id;
+            const isHighlighted = isSelectedFromDesktop || isPopular;
 
             return (
               <Card
                 key={plan.id}
-                glow={isPopular ? 'blue' : 'none'}
+                glow={isHighlighted ? 'blue' : 'none'}
                 hoverEffect
                 className={`relative flex flex-col justify-between p-8 ${
-                  isPopular
+                  isHighlighted
                     ? 'border-brand-primary/60 bg-gradient-to-b from-brand-card via-brand-surface to-brand-card'
                     : 'bg-brand-card'
                 }`}
               >
-                {isPopular && (
+                {isSelectedFromDesktop ? (
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+                    <span className="px-3.5 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-brand-primary text-brand-bg shadow-glow flex items-center gap-1.5 animate-pulse">
+                      <Zap className="w-3.5 h-3.5" /> Selected from Desktop
+                    </span>
+                  </div>
+                ) : isPopular ? (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
                     <span className="px-3.5 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-brand-primary text-brand-bg shadow-glow flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5" /> Recommended
                     </span>
                   </div>
-                )}
+                ) : null}
 
                 <div className="space-y-6">
                   <div>
@@ -185,13 +232,17 @@ export const PricingPage: React.FC = () => {
                 {/* Purchase Button */}
                 <div className="pt-8">
                   <Button
-                    variant={isPopular ? 'primary' : isFree ? 'outline' : 'secondary'}
+                    variant={isHighlighted ? 'primary' : isFree ? 'outline' : 'secondary'}
                     size="lg"
                     className="w-full"
                     isLoading={isProcessing}
                     onClick={() => handleSelectPlan(plan.id)}
                   >
-                    {isFree ? 'Download Free Edition' : `Select ${plan.name} (₹${plan.priceInr})`}
+                    {isFree
+                      ? 'Download Free Edition'
+                      : isSelectedFromDesktop
+                      ? `Pay ₹${plan.priceInr} with Razorpay (UPI/Cards)`
+                      : `Select ${plan.name} (₹${plan.priceInr})`}
                   </Button>
                 </div>
               </Card>
@@ -240,7 +291,12 @@ export const PricingPage: React.FC = () => {
               className="w-full"
               onClick={() => {
                 setAuthModalOpen(false);
-                navigate('/login', { state: { returnTo: '/pricing', selectedPlan: selectedPlanForAuth } });
+                navigate('/login', { 
+                  state: { 
+                    returnTo: isFromDesktop ? `/pricing?source=desktop&plan=${selectedPlanForAuth || ''}` : '/pricing', 
+                    selectedPlan: selectedPlanForAuth 
+                  } 
+                });
               }}
             >
               Sign In to Account
@@ -251,7 +307,12 @@ export const PricingPage: React.FC = () => {
               className="w-full"
               onClick={() => {
                 setAuthModalOpen(false);
-                navigate('/register', { state: { returnTo: '/pricing', selectedPlan: selectedPlanForAuth } });
+                navigate('/register', { 
+                  state: { 
+                    returnTo: isFromDesktop ? `/pricing?source=desktop&plan=${selectedPlanForAuth || ''}` : '/pricing', 
+                    selectedPlan: selectedPlanForAuth 
+                  } 
+                });
               }}
             >
               Create New Account
