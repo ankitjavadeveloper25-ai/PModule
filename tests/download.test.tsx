@@ -13,8 +13,8 @@ describe('DownloadPage Component', () => {
     );
 
     expect(await screen.findByText(/Winter ARC Pro v1.1.0/i)).toBeInTheDocument();
-    expect(screen.getByText('74.36 MB')).toBeInTheDocument();
-    expect(screen.getByText(/a3450987f79081c04a8f71a3baf53950e2de096bdcd4f3aada28ebef806ca316/i)).toBeInTheDocument();
+    expect(screen.getByText('74.37 MB')).toBeInTheDocument();
+    expect(screen.getByText(/aa00266b14503f180195832813809a07a739a619eeb1b39758ef9791d75d2f35/i)).toBeInTheDocument();
   });
 
   it('renders system requirements and PowerShell verification instructions', async () => {
