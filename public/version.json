@@ -1,0 +1,22 @@
+{
+  "productName": "Winter ARC Pro Desktop",
+  "version": "1.1.0",
+  "releaseDate": "2026-10-31",
+  "installerFilename": "Winter-ARC-Pro-1.1.0.msi",
+  "fileSizeBytes": 77949257,
+  "fileSizeFormatted": "74.34 MB",
+  "sha256": "c355eab844b64c96100e2fd5942389128e6489e5d7faa202d2fd8b6dd63305c9",
+  "downloadUrl": "/downloads/Winter-ARC-Pro-1.1.0.msi",
+  "githubReleaseUrl": "https://github.com/winterarc/winter-arc-desktop/releases/tag/v1.1.0",
+  "status": "STABLE",
+  "releaseNotes": [
+    "Fixed input text visibility across dark mode and high-contrast light mode UI",
+    "User-defined shelf roadmap with custom milestones and deliverables",
+    "Custom timer durations (25m, 50m, custom) with automatic audio chime completion alert",
+    "User-defined habit categories, focus subjects, and study block topics",
+    "AM / PM task schedule picker in Planner view",
+    "High-contrast dropdown menus and enlarged donut analytics charts",
+    "In-app desktop updater for automatic version checks and one-click upgrades",
+    "Native Windows MSI installer with automatic desktop shortcuts"
+  ]
+}
