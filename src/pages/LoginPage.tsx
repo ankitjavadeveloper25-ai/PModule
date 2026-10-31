@@ -84,7 +84,7 @@ export const LoginPage: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="developer@winterarc.pro"
+                placeholder="Email"
                 className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-brand-bg border border-brand-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary placeholder:text-brand-dim"
               />
               <Mail className="w-4 h-4 text-brand-dim absolute left-3.5 top-3.5" />

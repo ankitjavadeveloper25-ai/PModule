@@ -178,7 +178,7 @@ export const DownloadPage: React.FC = () => {
           Open Windows PowerShell and verify the cryptographic integrity of your downloaded installer before running:
         </p>
         <div className="bg-brand-bg p-3.5 rounded-xl font-mono text-xs text-brand-primary border border-brand-border select-all overflow-x-auto">
-          Get-FileHash -Path "$HOME\Downloads\Winter-ARC-Pro-1.0.1.msi" -Algorithm SHA256
+          Get-FileHash -Path "$HOME\Downloads\Winter-ARC-Pro-1.1.0.msi" -Algorithm SHA256
         </div>
         <p className="text-[11px] text-brand-dim">
           Compare the computed hash with the official hash published above to ensure zero file tampering or corruption during download.

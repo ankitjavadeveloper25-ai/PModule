@@ -52,7 +52,7 @@ export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showDevModal, setShowDevModal] = useState(false);
-  const [testEmail, setTestEmail] = useState('alex.challenger@gmail.com');
+  const [testEmail, setTestEmail] = useState('');
   const googleBtnRef = useRef<HTMLDivElement>(null);
 
   const isRealGoogleConfigured = Boolean(
@@ -246,7 +246,7 @@ export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
                   required
                   value={testEmail}
                   onChange={(e) => setTestEmail(e.target.value)}
-                  placeholder="developer@gmail.com"
+                  placeholder="Email"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-brand-bg border border-brand-border text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                 />
               </div>

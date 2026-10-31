@@ -52,7 +52,7 @@ export const FaqPage: React.FC = () => {
     {
       category: 'Account & Support',
       q: 'What should I do if I paid but my desktop app still shows Free?',
-      a: '1. Ensure you are signed in with the same email you used during checkout. 2. In the desktop application, navigate to Account / Subscription and click "Sync License". 3. If the problem persists, copy your signed token from your website Account dashboard or email support@winterarc.pro with your Razorpay Payment ID.',
+      a: '1. Ensure you are signed in with the same email you used during checkout. 2. In the desktop application, navigate to Account / Subscription and click "Sync License". 3. If the problem persists, copy your signed token from your website Account dashboard or email ankitjavadeveloper85@gmail.com with your Razorpay Payment ID.',
     },
     {
       category: 'Account & Support',

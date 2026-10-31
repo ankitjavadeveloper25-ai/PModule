@@ -41,7 +41,7 @@ export const GuidePage: React.FC = () => {
             <h2 className="text-xl font-bold text-white">Download the Official Windows MSI Package</h2>
           </div>
           <p className="text-sm text-brand-muted leading-relaxed">
-            Download the official <strong className="text-white">Winter ARC Pro-1.0.1.msi</strong> installer. The installer includes an embedded Java 21 JRE, meaning you do not need to install Java, JDK, or any runtime dependencies manually.
+            Download the official <strong className="text-white">Winter ARC Pro-1.1.0.msi</strong> installer. The installer includes an embedded Java 21 JRE, meaning you do not need to install Java, JDK, or any runtime dependencies manually.
           </p>
           <div className="pt-2">
             <Link to="/download">
@@ -64,12 +64,12 @@ export const GuidePage: React.FC = () => {
             Ensure the downloaded installer has not been altered or corrupted. Open PowerShell and run:
           </p>
           <div className="bg-brand-bg p-3.5 rounded-xl font-mono text-xs text-brand-primary border border-brand-border select-all overflow-x-auto">
-            Get-FileHash -Path "$HOME\Downloads\Winter-ARC-Pro-1.0.1.msi" -Algorithm SHA256
+            Get-FileHash -Path "$HOME\Downloads\Winter-ARC-Pro-1.1.0.msi" -Algorithm SHA256
           </div>
           <p className="text-xs text-brand-dim">
             Expected SHA-256 Hash:{' '}
             <span className="text-brand-text font-mono select-all">
-              96374a521f746bd238eadb0a94b6934ebe4ae92cd7ebc615dda081400cc770c2
+              2817b1e04cb1ce508e3df79db045c25630ee8fa5fb036918253b16b4b82633ae
             </span>
           </p>
         </Card>

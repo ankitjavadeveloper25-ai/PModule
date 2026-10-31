@@ -12,9 +12,9 @@ describe('DownloadPage Component', () => {
       </BrowserRouter>
     );
 
-    expect(await screen.findByText(/Winter ARC Pro v1.0.1/i)).toBeInTheDocument();
-    expect(screen.getByText('72.88 MB')).toBeInTheDocument();
-    expect(screen.getByText(/96374a521f746bd238eadb0a94b6934ebe4ae92cd7ebc615dda081400cc770c2/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Winter ARC Pro v1.1.0/i)).toBeInTheDocument();
+    expect(screen.getByText('74.32 MB')).toBeInTheDocument();
+    expect(screen.getByText(/2817b1e04cb1ce508e3df79db045c25630ee8fa5fb036918253b16b4b82633ae/i)).toBeInTheDocument();
   });
 
   it('renders system requirements and PowerShell verification instructions', async () => {
