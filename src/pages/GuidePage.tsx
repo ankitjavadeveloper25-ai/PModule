@@ -69,7 +69,7 @@ export const GuidePage: React.FC = () => {
           <p className="text-xs text-brand-dim">
             Expected SHA-256 Hash:{' '}
             <span className="text-brand-text font-mono select-all">
-              c355eab844b64c96100e2fd5942389128e6489e5d7faa202d2fd8b6dd63305c9
+              a3450987f79081c04a8f71a3baf53950e2de096bdcd4f3aada28ebef806ca316
             </span>
           </p>
         </Card>
