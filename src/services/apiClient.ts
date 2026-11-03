@@ -81,6 +81,10 @@ export async function request<T>(endpoint: string, options: RequestOptions = {})
     }
 
     if (!res.ok) {
+      if (res.status === 401 || res.status === 403) {
+        // Clear invalid or expired credentials so subsequent requests are not poisoned
+        clearStoredAuth();
+      }
       const errorMsg = data?.error || data?.message || `Request failed with HTTP ${res.status}`;
       throw new ApiError(errorMsg, res.status, data);
     }

@@ -50,14 +50,7 @@ export const PricingPage: React.FC = () => {
       return;
     }
 
-    // Razorpay orders require authenticated user on Spring Boot backend
-    if (!isAuthenticated) {
-      setSelectedPlanForAuth(planId);
-      setAuthModalOpen(true);
-      return;
-    }
-
-    // Trigger Razorpay Checkout
+    // Trigger Razorpay Checkout directly with QR code & UPI
     openCheckout({
       planId,
       userEmail: user?.email || emailParam || undefined,

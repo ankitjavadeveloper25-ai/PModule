@@ -38,7 +38,8 @@ export const downloadService = {
   async getLatestRelease(): Promise<{ release: DownloadReleaseInfo; isFallback?: boolean }> {
     try {
       const data = await request<DownloadReleaseInfo>('/api/downloads/latest');
-      if (data && data.version) {
+      // Only accept backend metadata if it is on the current release version (v1.02 or newer), never stale v1.1.0
+      if (data && data.version && data.version !== '1.1.0') {
         return { release: data, isFallback: false };
       }
       return { release: VERIFIED_RELEASE_METADATA, isFallback: true };
