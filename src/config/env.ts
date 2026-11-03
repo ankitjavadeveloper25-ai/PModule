@@ -5,8 +5,8 @@ export const config = {
   apiBaseUrl: import.meta.env.VITE_API_BASE_URL || 'https://springboot-igj8.onrender.com',
   razorpayKeyId: import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_live_Ttw5tWaebVRPmM',
   googleClientId: import.meta.env.VITE_GOOGLE_CLIENT_ID || '',
-  downloadUrl: import.meta.env.VITE_DOWNLOAD_URL || '/downloads/Winter-ARC-Pro-1.1.0.msi',
-  githubReleaseUrl: import.meta.env.VITE_GITHUB_RELEASE_URL || 'https://github.com/winterarc/winter-arc-desktop/releases',
+  downloadUrl: import.meta.env.VITE_DOWNLOAD_URL || '/downloads/Winter-ARC-Pro-1.02.msi',
+  githubReleaseUrl: import.meta.env.VITE_GITHUB_RELEASE_URL || 'https://github.com/ankitjavadeveloper25-ai/ProgressTracker/releases',
   contactEmail: import.meta.env.VITE_CONTACT_EMAIL || 'ankitjavadeveloper25@gmail.com',
-  appVersion: import.meta.env.VITE_APP_VERSION || '1.1.0',
+  appVersion: import.meta.env.VITE_APP_VERSION || '1.02',
 };
